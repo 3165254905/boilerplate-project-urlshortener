@@ -49,6 +49,33 @@ app.post('/api/shorturl', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
+=======
+app.post('/api/shorturl', (req, res) => {
+  const url = req.body.url;
+  if (!/^(http|https):\/\/[^\s]+.com$/.test(url)) {
+    res.json({ error: 'invalid url' });
+    return;
+  }
+  const shortUrl = 1;
+  const urlModel = new Url({
+    url: url,
+    shortUrl: shortUrl
+  });
+  urlModel.save((err, data) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(data);
+    }
+  });
+  res.json({
+    original_url: url,
+    short_url: shortUrl
+  });
+});
+
+>>>>>>> origin/gomix
 app.get('/api/shorturl/:shortUrl', (req, res) => {
   const shortUrl = req.params.shortUrl;
   Url.findOne({ shortUrl: shortUrl }, (err, data) => {
